@@ -122,23 +122,6 @@
 \author{JB Alberge}
 \date{2024-05-09}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{conjecture}{Conjecture}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{definition}
-\newtheorem{hypothesis}{Hypothesis}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -166,7 +149,11 @@ To achieve this practical work, we will use a collection of R packages called ti
   Once RStudio and R are installed, open RSudio and run the following command to install the \texttt{tidyverse} collection of \texttt{R} packages.
 \end{enumerate}
 
-\texttt{install.packages("tidyverse")}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -176,7 +163,11 @@ To achieve this practical work, we will use a collection of R packages called ti
   Finally, load the \texttt{tidyverse} R packages within your current R environment with the command below. If this command works fine, you should be all set to start using R!
 \end{enumerate}
 
-\texttt{library(tidyverse)}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{good-practices}{%
 \section{Good practices}\label{good-practices}}
@@ -185,49 +176,65 @@ Here are some good practices to write R code. They will help you write clear and
 
 Comment your code with \# statements
 
-\begin{verbatim}
-a <- choose(5, 2) # computes binomial coefficients
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{choose}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{) }\CommentTok{\# computes binomial coefficients}
+\end{Highlighting}
+\end{Shaded}
 
 Avoid obvious comments
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# if x is greather than y, then print x}
+\ControlFlowTok{if}\NormalTok{ (x}\SpecialCharTok{\textgreater{}}\NormalTok{y) }\FunctionTok{print}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-x <- 2
-y <- 1
-# if x is greather than y, then print x
-if (x>y) print(x)
+## [1] 2
 \end{verbatim}
 
 Group your code by task
 
-\begin{verbatim}
-# assign values
-x <- 2
-y <- 1
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# assign values}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{1}
 
-# compute statements
-if (x>y) print(x)
+\CommentTok{\# compute statements}
+\ControlFlowTok{if}\NormalTok{ (x}\SpecialCharTok{\textgreater{}}\NormalTok{y) }\FunctionTok{print}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
 \end{verbatim}
 
 Use a consistent naming scheme
 
-\begin{verbatim}
-# good !
-sum.two.elements <- function(x, y){
-  return(x+y)
-}
-multiply.two.elements <- function(x, y){
-  return(x*y)
-}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# good !}
+\NormalTok{sum.two.elements }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y)\{}
+  \FunctionTok{return}\NormalTok{(x}\SpecialCharTok{+}\NormalTok{y)}
+\NormalTok{\}}
+\NormalTok{multiply.two.elements }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y)\{}
+  \FunctionTok{return}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{y)}
+\NormalTok{\}}
 
-# bad !
-my.function.bis <- function(x, y){
-  return(x+y)
-}
-test.function <- function(x, y){
-  return(x*y)
-}
-\end{verbatim}
+\CommentTok{\# bad !}
+\NormalTok{my.function.bis }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y)\{}
+  \FunctionTok{return}\NormalTok{(x}\SpecialCharTok{+}\NormalTok{y)}
+\NormalTok{\}}
+\NormalTok{test.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y)\{}
+  \FunctionTok{return}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{y)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{itemize}
 \tightlist
@@ -240,208 +247,193 @@ test.function <- function(x, y){
   Should you receive any error message from the R console, make sure you've read it and googled it carefully before going crazy.
 \end{itemize}
 
-\hypertarget{mm-r-codebook}{%
-\chapter{MM R Codebook}\label{mm-r-codebook}}
+\hypertarget{r-basic-functions}{%
+\chapter{R basic functions}\label{r-basic-functions}}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+These examples were adapted from B. Michel's \href{http://bertrand.michel.perso.math.cnrs.fr/Enseignements.html}{introduction to R}.
 
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
-
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
-
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
-
-There are two steps to cross-reference any heading:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
-  \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
-  \end{itemize}
-\item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
-\end{enumerate}
-
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
-
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
-
-See Figure \ref{fig:nice-fig}.
+R is a calculator.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\NormalTok{A }\OtherTok{=} \DecValTok{1}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{A}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
 
-{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Don't miss Table \ref{tab:nice-tab}.
+To create an object in R, the syntax is Name.of.the.object.to.create \textless- instructions :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\CommentTok{\# This is a comment}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# Assignment}
+\NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
+The online R help is very complete. You can reach it with the command \texttt{help()} (also \texttt{?}). For example, type \texttt{help(sum)} (also \texttt{?sum}) in the console to get help about the function \texttt{sum}.
 
-\hypertarget{parts}{%
-\chapter{Parts}\label{parts}}
-
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
-
-Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
-
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
-
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
-
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
-
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
-
-Reference items in your bibliography file(s) using \texttt{@key}.
-
-For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
-
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
-
-\hypertarget{blocks}{%
-\chapter{Blocks}\label{blocks}}
-
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
-
-Here is an equation.
-
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \label{eq:binom}
-\end{equation}
-
-You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
-
-\hypertarget{theorems-and-proofs}{%
-\section{Theorems and proofs}\label{theorems-and-proofs}}
-
-Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
-
-\begin{theorem}
-\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
-and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
-\[a^2 + b^2 = c^2\]
-\end{theorem}
-
-Read more here \url{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}.
-
-\hypertarget{callout-blocks}{%
-\section{Callout blocks}\label{callout-blocks}}
-
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: \url{https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html}
-
-\hypertarget{sharing-your-book}{%
-\chapter{Sharing your book}\label{sharing-your-book}}
-
-\hypertarget{publishing}{%
-\section{Publishing}\label{publishing}}
-
-HTML books can be published online, see: \url{https://bookdown.org/yihui/bookdown/publishing.html}
-
-\hypertarget{pages}{%
-\section{404 pages}\label{pages}}
-
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
-
-\hypertarget{metadata-for-sharing}{%
-\section{Metadata for sharing}\label{metadata-for-sharing}}
-
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
-
-This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
-
-Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
-
-Read more about the features of this output format here:
-
-\url{https://pkgs.rstudio.com/bookdown/reference/gitbook.html}
-
-Or use:
+A vector is a sequence of data points of the same type. A vector can be created with \texttt{c()}. Try the following commands:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
+\NormalTok{A }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{0}\NormalTok{,}\AttributeTok{to=}\DecValTok{10}\NormalTok{,}\AttributeTok{length=}\DecValTok{2}\NormalTok{)}
+\NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{0}\NormalTok{,}\AttributeTok{to=}\DecValTok{1}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{D }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{A;B;C;D}
+\NormalTok{C[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{C[}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{]}
+\DecValTok{3} \SpecialCharTok{*}\NormalTok{ B}
+\NormalTok{D }\SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{:}\DecValTok{11}
 \end{Highlighting}
 \end{Shaded}
 
+Matrices can be defined using the function matrix():
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{M}
+\FunctionTok{dim}\NormalTok{(M)}
+\FunctionTok{length}\NormalTok{(M)}
+\FunctionTok{ncol}\NormalTok{(M)}
+\FunctionTok{nrow}\NormalTok{(M)}
+\FunctionTok{rownames}\NormalTok{(M)}
+\FunctionTok{colnames}\NormalTok{(M)}
+\NormalTok{M[}\DecValTok{2}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+\NormalTok{M[}\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),]}
+\NormalTok{M }\SpecialCharTok{\%*\%}\NormalTok{ A}
+\FunctionTok{t}\NormalTok{(M)}
+\end{Highlighting}
+\end{Shaded}
+
+A data.frame is key quantity for statistics in R. A data.frame is a matrix with each line corresponding to an individual and each column corresponding to a variable measured on the individuals. Each column thus represents a single variable (same type across all individuals).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var1}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{,}\StringTok{"b"}\NormalTok{,}\StringTok{"a"}\NormalTok{,}\StringTok{"fi"}\NormalTok{,}\StringTok{"jk"}\NormalTok{) }
+\NormalTok{var2}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{) }
+\NormalTok{tab}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(var1,var2) }
+\NormalTok{tab }
+\NormalTok{tab}\SpecialCharTok{$}\NormalTok{var2}
+\end{Highlighting}
+\end{Shaded}
+
+The function \texttt{read.table()} read the data of a (text or csv) file and import them into R as a data.frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MyData }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\AttributeTok{file=} \StringTok{"(complete) file path"}\NormalTok{,}
+                     \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{,}
+                     \AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}
+                     \AttributeTok{row.names =}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+The file argument is a character string, it can be the name of the file if the file is in the work director.
+
+S4 classes can fit all these data types (vectors, data.frames, lists) in their attributes, which are themselves accessible via an @ symbol (use \href{mailto:object@data.frame}{\nolinkurl{object@data.frame}}\$var1).
+
+The \texttt{ggplot2} package, which is part of the \texttt{tidyverse} collection of packages, offers a powerful graphics language for creating elegant and complex plots. It is based on a so-called ``Grammar of Graphics'' which consists in independently specifying plot building blocks and in combining them to create just about any kind of graphical display you want. Building blocks of a graph include: data, aesthetic mapping (something you can see on a graph), geometric object, statistical transformations, scales\ldots{}
+
+For this tutorial we only give a few illustrations of \texttt{ggplot2} graphics. See for instance this pdf \href{https://rstudio.github.io/cheatsheets/data-visualization.pdf}{cheatsheet} for more details.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(mpg)}
+\NormalTok{?mpg}
+\FunctionTok{data}\NormalTok{(mpg)}
+\FunctionTok{ggplot}\NormalTok{(mpg) }\SpecialCharTok{+}  \FunctionTok{aes}\NormalTok{(hwy) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\hypertarget{mmrf-commpass-datasets}{%
+\chapter{MMRF CoMMpass datasets}\label{mmrf-commpass-datasets}}
+
+This codebook will rely on data from the MMRF CoMMpass data. Register as a researcher and download the following data from release IA21 \href{https://research.themmrf.org/population/\#/ds/6262ea84d1211200016ce44c/downloads}{https://research.themmrf.org/} in a directory named \texttt{MMRF\_IA21}.
+
+\begin{verbatim}
+CoMMpass_IA21_FlatFile_Dictionaries.tar.gz # decompress this folder
+CoMMpass_IA21_FlatFiles.tar.gz # decompress
+\end{verbatim}
+
+\hypertarget{explore-mmrf-commpass-clinical-variables}{%
+\section{Explore MMRF CoMMpass clinical variables}\label{explore-mmrf-commpass-clinical-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'stringr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'lubridate' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v lubridate 1.9.2     v tibble    3.2.1
+## v purrr     1.0.1     v tidyr     1.3.0
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 
