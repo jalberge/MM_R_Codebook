@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MM R Codebook</title>
+  <title>Chapter 2 MM R Codebook | MM R Codebook</title>
   <meta name="description" content="This is a new attempt to create a codebook for beginners to explore MM data analysis with R" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MM R Codebook" />
+  <meta property="og:title" content="Chapter 2 MM R Codebook | MM R Codebook" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a new attempt to create a codebook for beginners to explore MM data analysis with R" />
   <meta name="github-repo" content="jalberge/MM_R_Codebook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MM R Codebook" />
+  <meta name="twitter:title" content="Chapter 2 MM R Codebook | MM R Codebook" />
   
   <meta name="twitter:description" content="This is a new attempt to create a codebook for beginners to explore MM data analysis with R" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="mm-r-codebook.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="cross.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,68 +218,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MM R Codebook</h1>
-<p class="author"><em>JB Alberge</em></p>
-<p class="date"><em>2024-05-09</em></p>
+<div id="mm-r-codebook" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> MM R Codebook<a href="mm-r-codebook.html#mm-r-codebook" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (<code>#</code>) per .Rmd file.</p>
+<div id="a-section" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> A section<a href="mm-r-codebook.html#a-section" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>All chapter sections start with a second-level (<code>##</code>) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.</p>
+<div id="an-unnumbered-section" class="section level3 unnumbered hasAnchor">
+<h3>An unnumbered section<a href="mm-r-codebook.html#an-unnumbered-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chapters and sections are numbered by default. To un-number a heading, add a <code>{.unnumbered}</code> or the shorter <code>{-}</code> at the end of the heading, like in this section.</p>
+
 </div>
-<div id="about" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This is a beginner’s guide to MM analysis with R. Please contact me <code>jalberge&lt;at&gt;broadinstitute&lt;dot&gt;org</code> for feedback and suggestions.</p>
-<div id="pre-requisites" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Pre-requisites<a href="index.html#pre-requisites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To achieve this practical work, we will use a collection of R packages called tidyverse, available with R version ≥ 4. We recommend using the Rstudio software as a development environment. R is a language and a calculator. Rstudio is a graphical development environment built on top of R. Tidyverse is a collection of R packages commonly used for data science.</p>
-<ol style="list-style-type: decimal">
-<li><p>To download and install <code>R</code>, please follow instruction at the Comprehensive R Archive Network: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></p></li>
-<li><p>To download and install <code>Rstudio Desktop</code>, go to <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a> and hit the Download Rstudio Desktop for &lt;MacOS/Linux/Windows&gt;.</p></li>
-<li><p>Once RStudio and R are installed, open RSudio and run the following command to install the <code>tidyverse</code> collection of <code>R</code> packages.</p></li>
-</ol>
-<p><code>install.packages("tidyverse")</code></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Finally, load the <code>tidyverse</code> R packages within your current R environment with the command below. If this command works fine, you should be all set to start using R!</li>
-</ol>
-<p><code>library(tidyverse)</code></p>
-</div>
-<div id="good-practices" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Good practices<a href="index.html#good-practices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here are some good practices to write R code. They will help you write clear and maintainable code.</p>
-<p>Comment your code with # statements</p>
-<pre><code>a &lt;- choose(5, 2) # computes binomial coefficients</code></pre>
-<p>Avoid obvious comments</p>
-<pre><code>x &lt;- 2
-y &lt;- 1
-# if x is greather than y, then print x
-if (x&gt;y) print(x)</code></pre>
-<p>Group your code by task</p>
-<pre><code># assign values
-x &lt;- 2
-y &lt;- 1
-
-# compute statements
-if (x&gt;y) print(x)</code></pre>
-<p>Use a consistent naming scheme</p>
-<pre><code># good !
-sum.two.elements &lt;- function(x, y){
-  return(x+y)
-}
-multiply.two.elements &lt;- function(x, y){
-  return(x*y)
-}
-
-# bad !
-my.function.bis &lt;- function(x, y){
-  return(x+y)
-}
-test.function &lt;- function(x, y){
-  return(x*y)
-}</code></pre>
-<ul>
-<li>DRY principle: Don’t Repeat Yourself. Automate repetitive tasks. The same piece of code should not be repeated, but reused.</li>
-<li>Limit line length</li>
-<li>Set your working directory where you store all the code and the results setwd(‘C:/Users/JohnDoe/MM_R_Codebook/’)
-Should you receive any error message from the R console, make sure you’ve read it and googled it carefully before going crazy.</li>
-</ul>
-
 </div>
 </div>
             </section>
@@ -287,8 +236,8 @@ Should you receive any error message from the R console, make sure you’ve read
           </div>
         </div>
       </div>
-
-<a href="mm-r-codebook.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cross.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -319,7 +268,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {

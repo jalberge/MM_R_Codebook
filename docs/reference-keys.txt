@@ -2,10 +2,9 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 about
-usage
-render-book
-preview-book
-hello-bookdown
+pre-requisites
+good-practices
+mm-r-codebook
 a-section
 cross
 chapters-and-sub-chapters
