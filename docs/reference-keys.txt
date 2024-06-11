@@ -4,3 +4,16 @@ good-practices
 r-basic-functions
 mmrf-commpass-datasets
 explore-mmrf-commpass-clinical-variables
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+setup-working-directory
+load-mmrf-patient-information
+represent-data-information-with-ggplot2
+explore-mmrf-commpass-directory
+represent-data-with-ggplot2
+getting-familiar-with-the-mmrf-commpass-datasets-in-r
+setup-a-working-directory
+explore-data-with-the-r-tidyverse
+merge-information-across-tables
+survival-analysis-of-the-commpass-cohort
+survival-analysis-and-cox-regression
+kaplan-meier-curves-from-survival-data

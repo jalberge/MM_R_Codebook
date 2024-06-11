@@ -23,7 +23,7 @@
 <meta name="author" content="JB Alberge" />
 
 
-<meta name="date" content="2024-05-09" />
+<meta name="date" content="2024-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">MM R Codebook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> cover-image: path to the social sharing image like images/cover.jpg</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#pre-requisites"><i class="fa fa-check"></i><b>1.1</b> Pre-requisites</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#good-practices"><i class="fa fa-check"></i><b>1.2</b> Good practices</a></li>
@@ -148,7 +148,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="r-basic-functions.html"><a href="r-basic-functions.html"><i class="fa fa-check"></i><b>2</b> R basic functions</a></li>
 <li class="chapter" data-level="3" data-path="mmrf-commpass-datasets.html"><a href="mmrf-commpass-datasets.html"><i class="fa fa-check"></i><b>3</b> MMRF CoMMpass datasets</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="mmrf-commpass-datasets.html"><a href="mmrf-commpass-datasets.html#explore-mmrf-commpass-clinical-variables"><i class="fa fa-check"></i><b>3.1</b> Explore MMRF CoMMpass clinical variables</a></li>
+<li class="chapter" data-level="3.1" data-path="mmrf-commpass-datasets.html"><a href="mmrf-commpass-datasets.html#explore-mmrf-commpass-directory"><i class="fa fa-check"></i><b>3.1</b> Explore MMRF CoMMpass directory</a></li>
+<li class="chapter" data-level="3.2" data-path="mmrf-commpass-datasets.html"><a href="mmrf-commpass-datasets.html#load-mmrf-patient-information"><i class="fa fa-check"></i><b>3.2</b> Load MMRF patient information</a></li>
+<li class="chapter" data-level="3.3" data-path="mmrf-commpass-datasets.html"><a href="mmrf-commpass-datasets.html#represent-data-with-ggplot2"><i class="fa fa-check"></i><b>3.3</b> Represent data with ggplot2</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -175,27 +177,146 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This codebook will rely on data from the MMRF CoMMpass data. Register as a researcher and download the following data from release IA21 <a href="https://research.themmrf.org/population/#/ds/6262ea84d1211200016ce44c/downloads">https://research.themmrf.org/</a> in a directory named <code>MMRF_IA21</code>.</p>
 <pre><code>CoMMpass_IA21_FlatFile_Dictionaries.tar.gz # decompress this folder
 CoMMpass_IA21_FlatFiles.tar.gz # decompress</code></pre>
-<div id="explore-mmrf-commpass-clinical-variables" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Explore MMRF CoMMpass clinical variables<a href="mmrf-commpass-datasets.html#explore-mmrf-commpass-clinical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="mmrf-commpass-datasets.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;stringr&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.1.2</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.2     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ lubridate 1.9.2     ✔ tibble    3.2.1
-## ✔ purrr     1.0.1     ✔ tidyr     1.3.0
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div id="explore-mmrf-commpass-directory" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Explore MMRF CoMMpass directory<a href="mmrf-commpass-datasets.html#explore-mmrf-commpass-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At this point, we assume you have a directory named <code>MMRF_IA21</code> on your computer, which contains the analysis from TGEN’s Phoenix pipeline (<a href="https://github.com/tgen/phoenix/" class="uri">https://github.com/tgen/phoenix/</a>). We will explore the available clinical annotation for samples and patients.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="mmrf-commpass-datasets.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="mmrf-commpass-datasets.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="mmrf-commpass-datasets.html#cb2-3" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;MMRF_IA21&quot;</span>)</span></code></pre></div>
+<p>If the output of the above command is an error, you may not be working from the expected directory. You can fix that by changing your working directory with the <code>getwd</code> and <code>setwd</code> pair of commands, or manually specify the path to “MMRF_IA21” files in the next lines of code.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="mmrf-commpass-datasets.html#cb3-1" tabindex="-1"></a><span class="co"># un-comment (remove # sign) and adjust the following line with your own working directory</span></span>
+<span id="cb3-2"><a href="mmrf-commpass-datasets.html#cb3-2" tabindex="-1"></a><span class="co"># setwd(&quot;~/Documents/MyProject&quot;)</span></span>
+<span id="cb3-3"><a href="mmrf-commpass-datasets.html#cb3-3" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/Users/jean-baptiste/Dropbox (Partners HealthCare)/2_Projects/MM_R_Codebook&quot;</code></pre>
+</div>
+<div id="load-mmrf-patient-information" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Load MMRF patient information<a href="mmrf-commpass-datasets.html#load-mmrf-patient-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tables from the MMRF database are usually in the tab-separated values format and can be read with the <code>read.table</code> (base R) or <code>read_tsv</code> function (tidyverse). In this codebook, we chose to use the tidyverse packages.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="mmrf-commpass-datasets.html#cb5-1" tabindex="-1"></a>mmrf <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;MMRF_IA21/CoMMpass_IA21_FlatFiles/MMRF_CoMMpass_IA21_PER_PATIENT.tsv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 1143 Columns: 91
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (27): PUBLIC_ID, D_PT_DIDPATIENTCOM, D_PT_PRIMARYREASON, D_PT_CAUSEOFDEA...
+## dbl (63): D_PT_ic_day, D_PT_deathdy, D_PT_lastdy, D_PT_complete, D_PT_discon...
+## lgl  (1): DEMOG_NATIVEHAWAIIA
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Use the combinations of functions <code>ncol</code>, <code>nrow</code>, <code>dim</code>, <code>class</code>, etc. to explore the dataset:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="mmrf-commpass-datasets.html#cb7-1" tabindex="-1"></a><span class="fu">nrow</span>(mmrf) <span class="co"># number of rows</span></span>
+<span id="cb7-2"><a href="mmrf-commpass-datasets.html#cb7-2" tabindex="-1"></a><span class="fu">ncol</span>(mmrf) <span class="co"># number of columns</span></span>
+<span id="cb7-3"><a href="mmrf-commpass-datasets.html#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="mmrf-commpass-datasets.html#cb7-4" tabindex="-1"></a><span class="fu">sapply</span>(mmrf, class) <span class="co"># for each column of mmrf (sapply function), report the class of the variable (class function) ()</span></span>
+<span id="cb7-5"><a href="mmrf-commpass-datasets.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="mmrf-commpass-datasets.html#cb7-6" tabindex="-1"></a><span class="fu">colnames</span>(mmrf) <span class="co"># get column names</span></span></code></pre></div>
+<p>Use basic R functions to extract information from the columns:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="mmrf-commpass-datasets.html#cb8-1" tabindex="-1"></a><span class="do">## extract variables</span></span>
+<span id="cb8-2"><a href="mmrf-commpass-datasets.html#cb8-2" tabindex="-1"></a><span class="co"># variables can be extracted with the $ sign and a direct reference to the column name:</span></span>
+<span id="cb8-3"><a href="mmrf-commpass-datasets.html#cb8-3" tabindex="-1"></a><span class="fu">head</span>(mmrf<span class="sc">$</span>PUBLIC_ID) <span class="co"># first values</span></span>
+<span id="cb8-4"><a href="mmrf-commpass-datasets.html#cb8-4" tabindex="-1"></a><span class="fu">tail</span>(mmrf<span class="sc">$</span>PUBLIC_ID) <span class="co"># last values</span></span>
+<span id="cb8-5"><a href="mmrf-commpass-datasets.html#cb8-5" tabindex="-1"></a>mmrf<span class="sc">$</span>PUBLIC_ID <span class="co"># all values</span></span>
+<span id="cb8-6"><a href="mmrf-commpass-datasets.html#cb8-6" tabindex="-1"></a>mmrf[[<span class="st">&quot;PUBLIC_ID&quot;</span>]] <span class="co"># specify column as a variable itself (can replace &quot;PUBLIC_ID&quot; with a variable pointing to &quot;PUBLIC_ID&quot;) </span></span>
+<span id="cb8-7"><a href="mmrf-commpass-datasets.html#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="mmrf-commpass-datasets.html#cb8-8" tabindex="-1"></a><span class="do">## subset parts of the table</span></span>
+<span id="cb8-9"><a href="mmrf-commpass-datasets.html#cb8-9" tabindex="-1"></a>mmrf[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="co"># this extracts the first 5 rows and 4 variables</span></span>
+<span id="cb8-10"><a href="mmrf-commpass-datasets.html#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="mmrf-commpass-datasets.html#cb8-11" tabindex="-1"></a>mmrf[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">&quot;PUBLIC_ID&quot;</span>, <span class="st">&quot;D_PT_deathdy&quot;</span>)] <span class="co"># this extracts the first 5 values for variables PUBLIC_ID and D_PT_deathdy</span></span></code></pre></div>
+<p>Numeric variables can also be treated with standard R functions</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="mmrf-commpass-datasets.html#cb9-1" tabindex="-1"></a>mmrf<span class="sc">$</span>D_PT_age <span class="co"># what are the values for age</span></span>
+<span id="cb9-2"><a href="mmrf-commpass-datasets.html#cb9-2" tabindex="-1"></a><span class="fu">summary</span>(mmrf<span class="sc">$</span>D_PT_age) <span class="co"># what are range; quantiles; and summary values</span></span>
+<span id="cb9-3"><a href="mmrf-commpass-datasets.html#cb9-3" tabindex="-1"></a><span class="fu">quantile</span>(mmrf<span class="sc">$</span>D_PT_age, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)) <span class="co"># check for quantiles of interest</span></span>
+<span id="cb9-4"><a href="mmrf-commpass-datasets.html#cb9-4" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(mmrf<span class="sc">$</span>D_PT_age)) <span class="co"># is there any NA values?</span></span>
+<span id="cb9-5"><a href="mmrf-commpass-datasets.html#cb9-5" tabindex="-1"></a><span class="fu">mean</span>(mmrf<span class="sc">$</span>D_PT_age) <span class="co"># compute the mean. mean(mmrf$D_PT_age, na.rm=TRUE) would ignore NA values when computing the mean</span></span></code></pre></div>
+<p>Other useful functions include: median, sd, min, max, …</p>
+<p>Character and categorical variables should also be checked for possible values and inconsistencies:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="mmrf-commpass-datasets.html#cb10-1" tabindex="-1"></a><span class="fu">table</span>(mmrf<span class="sc">$</span>D_PT_race, <span class="at">useNA =</span> <span class="st">&quot;ifany&quot;</span>) <span class="co"># what are affected values for a given variable (and their number of occurences)</span></span>
+<span id="cb10-2"><a href="mmrf-commpass-datasets.html#cb10-2" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">duplicated</span>(mmrf<span class="sc">$</span>PUBLIC_ID)) <span class="co"># is there any duplicated values</span></span>
+<span id="cb10-3"><a href="mmrf-commpass-datasets.html#cb10-3" tabindex="-1"></a>mmrf<span class="sc">$</span>PUBLIC_ID[<span class="fu">duplicated</span>(mmrf<span class="sc">$</span>PUBLIC_ID)] <span class="co"># if there was any duplicated values</span></span>
+<span id="cb10-4"><a href="mmrf-commpass-datasets.html#cb10-4" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(mmrf<span class="sc">$</span>PUBLIC_ID)) <span class="co"># how many uniques values are in the table for this variable</span></span>
+<span id="cb10-5"><a href="mmrf-commpass-datasets.html#cb10-5" tabindex="-1"></a><span class="fu">sort</span>(mmrf<span class="sc">$</span>PUBLIC_ID) <span class="co"># return values in an alphabetical order</span></span></code></pre></div>
+<p>Another grammar can be used in R and will become more powerful with tidyverse functions. Using <code>|&gt;</code> , (or, almost equivalent, <code>%&gt;%</code>),first arguments of functions (on the right of the <code>|&gt;</code>) will be fed with the output of the previous element (on the left of the <code>|&gt;</code>), almost like database query languages and grammar. This will facilitate applying list of functions to a single data table.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="mmrf-commpass-datasets.html#cb11-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span>
+<span id="cb11-2"><a href="mmrf-commpass-datasets.html#cb11-2" tabindex="-1"></a><span class="co"># is equivalent to:</span></span>
+<span id="cb11-3"><a href="mmrf-commpass-datasets.html#cb11-3" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
+<p>For example, to list and count the causes of death in the mmrf table, we could use:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="mmrf-commpass-datasets.html#cb12-1" tabindex="-1"></a>mmrf <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="mmrf-commpass-datasets.html#cb12-2" tabindex="-1"></a>  <span class="fu">group_by</span>(D_PT_CAUSEOFDEATH) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="mmrf-commpass-datasets.html#cb12-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+## # Groups:   D_PT_CAUSEOFDEATH [4]
+##   D_PT_CAUSEOFDEATH       n
+##   &lt;chr&gt;               &lt;int&gt;
+## 1 Disease Progression    22
+## 2 Disease progression   213
+## 3 Other                 182
+## 4 &lt;NA&gt;                  726</code></pre>
+<p>It is also easy to assign the output of a chain of instructions to a new variable: Here <code>group_by</code> will force the next layer to be applied to each unique combination of the categorical values specify in the grouping arguments:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="mmrf-commpass-datasets.html#cb14-1" tabindex="-1"></a>mmrf <span class="sc">|&gt;</span> <span class="fu">count</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1  1143</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="mmrf-commpass-datasets.html#cb16-1" tabindex="-1"></a>death.causes <span class="ot">&lt;-</span> mmrf <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="mmrf-commpass-datasets.html#cb16-2" tabindex="-1"></a>  <span class="fu">group_by</span>(D_PT_CAUSEOFDEATH) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="mmrf-commpass-datasets.html#cb16-3" tabindex="-1"></a>  <span class="fu">count</span>()</span>
+<span id="cb16-4"><a href="mmrf-commpass-datasets.html#cb16-4" tabindex="-1"></a>death.causes</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+## # Groups:   D_PT_CAUSEOFDEATH [4]
+##   D_PT_CAUSEOFDEATH       n
+##   &lt;chr&gt;               &lt;int&gt;
+## 1 Disease Progression    22
+## 2 Disease progression   213
+## 3 Other                 182
+## 4 &lt;NA&gt;                  726</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="mmrf-commpass-datasets.html#cb18-1" tabindex="-1"></a>stats.age <span class="ot">&lt;-</span> mmrf <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="mmrf-commpass-datasets.html#cb18-2" tabindex="-1"></a>  <span class="fu">group_by</span>(D_PT_race, D_PT_gender) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="mmrf-commpass-datasets.html#cb18-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_age=</span><span class="fu">median</span>(D_PT_age), <span class="at">min_age=</span><span class="fu">min</span>(D_PT_age), <span class="at">max_age=</span><span class="fu">max</span>(D_PT_age)) <span class="sc">|&gt;</span> <span class="co"># summarize to flatten the dataframe</span></span>
+<span id="cb18-4"><a href="mmrf-commpass-datasets.html#cb18-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">range=</span>max_age<span class="sc">-</span>min_age) <span class="sc">|&gt;</span> <span class="co"># mutate to define a new column</span></span>
+<span id="cb18-5"><a href="mmrf-commpass-datasets.html#cb18-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text=</span><span class="fu">str_c</span>(<span class="st">&quot;median=&quot;</span>, median_age,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;(&quot;</span>, max_age, <span class="st">&quot;-&quot;</span>, min_age, <span class="st">&quot;)&quot;</span>))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;D_PT_race&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="mmrf-commpass-datasets.html#cb20-1" tabindex="-1"></a>stats.age</span></code></pre></div>
+<pre><code>## # A tibble: 11 × 7
+## # Groups:   D_PT_race [6]
+##    D_PT_race D_PT_gender median_age min_age max_age range text                  
+##        &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                 
+##  1         1           1       65        27      93    66 &quot;median=65\n(93-27)&quot;  
+##  2         1           2       66        36      91    55 &quot;median=66\n(91-36)&quot;  
+##  3         2           1       65        32      87    55 &quot;median=65\n(87-32)&quot;  
+##  4         2           2       61        34      90    56 &quot;median=61\n(90-34)&quot;  
+##  5         3           2       53        53      53     0 &quot;median=53\n(53-53)&quot;  
+##  6         4           1       59        46      72    26 &quot;median=59\n(72-46)&quot;  
+##  7         4           2       63        42      71    29 &quot;median=63\n(71-42)&quot;  
+##  8         6           1       62.5      39      79    40 &quot;median=62.5\n(79-39)&quot;
+##  9         6           2       64        50      74    24 &quot;median=64\n(74-50)&quot;  
+## 10        NA           1       58        38      65    27 &quot;median=58\n(65-38)&quot;  
+## 11        NA           2       58        38      66    28 &quot;median=58\n(66-38)&quot;</code></pre>
+</div>
+<div id="represent-data-with-ggplot2" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Represent data with ggplot2<a href="mmrf-commpass-datasets.html#represent-data-with-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The ggplot2 package is a commonly used library which provides functions to visually represent data sets. Rstudio provides a very useful cheat sheet for ggplot2 function. <a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf" class="uri">https://rstudio.github.io/cheatsheets/data-visualization.pdf</a></p>
+<p>The grammar for ggplot2 is generally (1) ggplot() call to specify a data frame to work with, then (2) aes() calls to specify the variables used in axes and layers, and (3) graphical layers separated by a <code>+</code> sign.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mmrf-commpass-datasets.html#cb22-1" tabindex="-1"></a><span class="co"># represent the information</span></span>
+<span id="cb22-2"><a href="mmrf-commpass-datasets.html#cb22-2" tabindex="-1"></a><span class="fu">ggplot</span>(death.causes, <span class="fu">aes</span>(<span class="at">x =</span> D_PT_CAUSEOFDEATH, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="mmrf-commpass-datasets.html#cb22-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>In the above function call, <code>death.causes</code> represents a data frame, <code>D_PT_CAUSEOFDEATH</code> and <code>n</code> map x and y axes to column names (variables) of the data frame, while the <code>geom_bar</code> following the <code>+</code> sign specifies graphical layers of figure. We could change axis, theme, colors…</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="mmrf-commpass-datasets.html#cb23-1" tabindex="-1"></a><span class="co">#install.packages(&quot;RColorBrewer&quot;) if needed</span></span>
+<span id="cb23-2"><a href="mmrf-commpass-datasets.html#cb23-2" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb23-3"><a href="mmrf-commpass-datasets.html#cb23-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-4"><a href="mmrf-commpass-datasets.html#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="mmrf-commpass-datasets.html#cb23-5" tabindex="-1"></a><span class="fu">ggplot</span>(death.causes, <span class="fu">aes</span>(<span class="at">x =</span> D_PT_CAUSEOFDEATH, <span class="at">y =</span> n, <span class="at">fill=</span>D_PT_CAUSEOFDEATH)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="mmrf-commpass-datasets.html#cb23-6" tabindex="-1"></a>  <span class="co"># figure layer</span></span>
+<span id="cb23-7"><a href="mmrf-commpass-datasets.html#cb23-7" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="mmrf-commpass-datasets.html#cb23-8" tabindex="-1"></a>  <span class="co"># axis layer</span></span>
+<span id="cb23-9"><a href="mmrf-commpass-datasets.html#cb23-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span><span class="st">&quot;pseudo_log&quot;</span>, <span class="at">limits=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1000</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1000</span>)) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="mmrf-commpass-datasets.html#cb23-10" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">4</span>, <span class="st">&quot;Set1&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="mmrf-commpass-datasets.html#cb23-11" tabindex="-1"></a>  <span class="co"># axis labels</span></span>
+<span id="cb23-12"><a href="mmrf-commpass-datasets.html#cb23-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Cause of death&quot;</span>, <span class="at">y=</span><span class="st">&quot;Number of observations&quot;</span>, <span class="at">fill=</span><span class="st">&quot;Cause of death&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="mmrf-commpass-datasets.html#cb23-13" tabindex="-1"></a>  <span class="co"># graphical settings (independent of the data values)</span></span>
+<span id="cb23-14"><a href="mmrf-commpass-datasets.html#cb23-14" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-15"><a href="mmrf-commpass-datasets.html#cb23-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 
 </div>
 </div>
